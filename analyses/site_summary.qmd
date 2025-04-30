@@ -24,15 +24,14 @@ library(tidyverse)
 library(knitr)
 library(ggfortify)
 options(knitr.kable.NA = "")
-data <- read_tsv("../outputs/taxonomy_v4.tsv") %>%
+data <- read_tsv("../outputs/taxonomy_v5.tsv") %>%
   filter(site == params$site) %>%
   select(
     -site, -raw_taxonomy, -family_corrected, -family_correction,
     -genus_corrected, -genus_correction,
     -species_corrected, -species_correction, -scientific_corrected
   ) %>%
-  left_join(read_tsv("../outputs/traits_v4.tsv")) %>%
-  filter(trait != "hmax")
+  left_join(read_tsv("../outputs/traits_v5.tsv"))
 write_tsv(data, params$path)
 ```
 
@@ -106,7 +105,7 @@ data %>%
 
 ## Functional traits
 
-We used cleaned taxonomy to retrieve data from TRY [@kattge2019] and BIOMASS [@réjou-méchain2017]. Using BIOMASS [@réjou-méchain2017], we retrieved wood density for most species. From TRY [@kattge2019], we requested leaf nitrogen content, leaf are per leaf dry mass, wood density, and leaf area. We assembled all traits data from TRY [@kattge2019] and BIOMASS [@réjou-méchain2017], and obtained the following consolidated traits:
+We used cleaned taxonomy to retrieve data from TRY [@kattge2019] and BIOMASS [@réjou-méchain2017]. Using BIOMASS [@réjou-méchain2017], we retrieved wood density for most species. From TRY [@kattge2019], we requested leaf nitrogen content, leaf area per leaf dry mass, wood density, and leaf area. We assembled all traits data from TRY [@kattge2019] and BIOMASS [@réjou-méchain2017], and obtained the following consolidated traits:
 
 -   **N**: leaf nitrogen content per leaf dry mass, mg g^-1^
 -   **SLA**: leaf area per leaf dry mass, mm^2^ mg^-1^
@@ -117,7 +116,7 @@ We used cleaned taxonomy to retrieve data from TRY [@kattge2019] and BIOMASS [@r
 #| message: false
 #| warning: false
 data %>%
-  select(genus_cleaned, species_cleaned, trait, trait_value_raw) %>%
+  select(genus_cleaned, species_cleaned, trait, species_trait_value_raw) %>%
   na.omit() %>%
   mutate(trait = recode(trait,
     "WD" = '"WD ["~g~cm^{-3}~"]"',
@@ -125,7 +124,7 @@ data %>%
     "N" = '"N ["~mg~g^{-1}~"]"',
     "LA" = '"LA ["~mm^2~"]"'
   )) %>%
-  ggplot(aes(trait_value_raw)) +
+  ggplot(aes(species_trait_value_raw)) +
   geom_histogram() +
   facet_wrap(~trait, scales = "free", labeller = label_parsed) +
   theme_bw() +
@@ -141,29 +140,34 @@ n_tot <- data %>%
   unique() %>%
   nrow()
 data %>%
-  select(genus_cleaned, species_cleaned, trait, trait_value_raw) %>%
+  select(genus_cleaned, species_cleaned, trait, species_trait_value_raw) %>%
   na.omit() %>%
   group_by(genus_cleaned, species_cleaned, trait) %>%
-  summarise(trait_value_raw = mean(trait_value_raw)) %>%
+  summarise(species_trait_value_raw = mean(species_trait_value_raw)) %>%
   group_by(trait) %>%
   summarise(count = n(), percent = n() / n_tot * 100) %>%
   kable(caption = "Trait coverage across site species", digits = 2)
 ```
 
-Bu as the count are showing, a lot of traits data are missing. We used simple [predictive mean matching](https://en.wikipedia.org/wiki/Predictive_mean_matching) (PMM) data imputation with `mice` [@Zhang2016] to further impute missing trait values. We obtained the PCA below:
+However, as the count revealed a lot of missing data, we used missing data imputation with random forest using the `missForest` R package to further impute missing trait values [@Gendre2024]. We first aggregated data at the genus level with the median trait value to inform the genus or species missing trait data. We obtained a normalised root mean square error for imputation of NRMSE=1.03. We obtained the PCA below:
 
 ```{r pca}
 #| message: false
 #| warning: false
 #| fig-cap: "Imputed traits principal component analysis."
-autoplot(
-  princomp(select(data, trait, trait_value_imputed) %>%
+t <- data %>% 
+  select(genus_cleaned, trait, genus_trait_value_imputed) %>%
+  na.omit() %>% 
+    unique() %>% 
     pivot_wider(
       names_from = trait,
-      values_from = trait_value_imputed
+      values_from = genus_trait_value_imputed
     ) %>%
-    unnest() %>%
-    mutate(SLA = log(SLA), LA = log(LA)), cor = TRUE),
+    select(-genus_cleaned) %>% 
+    mutate(SLA = log(SLA), LA = log(LA)) %>% 
+      na.omit()
+autoplot(
+  princomp(t, cor = TRUE),
   loadings.label.size = 6,
   loadings.label.colour = "red", loadings.label.vjust = 1.1,
   loadings.label.repel = TRUE,
@@ -175,7 +179,7 @@ autoplot(
   geom_vline(aes(xintercept = 0), col = "black", linetype = "dotted") +
   theme_bw() +
   geom_density_2d_filled(alpha = .5) +
-  scale_fill_viridis_d("Species density")
+  scale_fill_viridis_d("Genus density")
 ```
 
 ## Shared table
@@ -193,8 +197,8 @@ Associated to this document you will find a table named `{site}_species.tsv` in 
 -   species_cleaned: species name with the synonymy and misspelling corrections with WFO and manual corrections
 -   cleaning_type: WFO automatic cleaning or using manual curation
 -   trait: the trait acronym or code
--   trait_value_raw: the trait raw value
--   trait_value_imputed: the trait imputed value in case of missing raw value
+-   species_trait_value_raw: the species median trait raw value from TRY
+-   genus_trait_value_imputed: the genus median trait imputed value in case of missing raw values
 -   definition: the trait definition
 -   unit: the trait unit
 
