@@ -51,4 +51,4 @@ raw_taxo %>%
 
 raw_taxo %>%
   select(-site_raw, -file) %>%
-  write_tsv("data/raw_data/raw_taxonomy_v5.tsv")
+  write_tsv("data/raw_data/raw_taxonomy_v6.tsv")

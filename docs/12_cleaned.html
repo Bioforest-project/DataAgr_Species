@@ -214,7 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>Then we started by cleaning raw species data content. This corresponds to <strong>version 5</strong>.</p>
+<p>Then we started by cleaning raw species data content. This corresponds to <strong>version 6</strong>.</p>
 <section id="names-corrections" class="level2">
 <h2 class="anchored" data-anchor-id="names-corrections">Names corrections</h2>
 <p>First we cleaned family, genus and species names using contingency table built on the information of dubious names from the previous chapter.</p>
@@ -231,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Nd"</span>, <span class="st">"nd10"</span>, <span class="st">"nd11"</span>, <span class="st">"nd14"</span>, <span class="st">"nd15"</span>, <span class="st">"nd16"</span>, <span class="st">"nd17"</span>, <span class="st">"nd2"</span>, <span class="st">"nd22"</span>,</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"nd23"</span>, <span class="st">"nd25"</span>, <span class="st">"nd26"</span>, <span class="st">"nd27"</span>, <span class="st">"nd28"</span>, <span class="st">"nd29"</span>, <span class="st">"nd33"</span>, <span class="st">"nd34"</span>,</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"nd4"</span>, <span class="st">"nd6"</span>, <span class="st">"nd7"</span>, <span class="st">"nd9"</span>, <span class="st">"N"</span>, <span class="st">"F"</span>, <span class="st">"cf"</span>, <span class="st">"No"</span>, <span class="st">"UN"</span>, <span class="st">"Un"</span>, <span class="st">"Spt"</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Unident"</span>, <span class="st">"Unknow"</span>, <span class="st">"unknown"</span>, <span class="st">"Unknown"</span>, <span class="st">"ni"</span>, <span class="st">"n"</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Unident"</span>, <span class="st">"Unknow"</span>, <span class="st">"unknown"</span>, <span class="st">"Unknown"</span>, <span class="st">"ni"</span>, <span class="st">"n"</span>, <span class="st">"OT"</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>sp_wrong <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Indet"</span>, <span class="st">"Indet."</span>, <span class="st">"sp"</span>, <span class="st">"sp."</span>, <span class="st">"Schaeff"</span>, <span class="st">"Schaeff."</span>, <span class="st">"Mast"</span>, <span class="st">"Welw"</span>,</span>
@@ -252,7 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">"L"</span>, <span class="st">"sur"</span>, <span class="st">"P"</span>, <span class="st">"4"</span>, <span class="st">"sp3"</span>, <span class="st">"id"</span>, <span class="st">"X"</span>, <span class="st">"2"</span>, <span class="st">"23"</span>, <span class="st">"1"</span>, <span class="st">"XVI"</span>,</span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="st">"19"</span>, <span class="st">"17"</span>, <span class="st">"5"</span>, <span class="st">"7"</span>, <span class="st">"22"</span>, <span class="st">"21"</span>, <span class="st">"3"</span>, <span class="st">"10"</span>, <span class="st">"11"</span>, <span class="st">"18"</span>, <span class="st">"16"</span>, <span class="st">"8"</span>,</span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="st">"XIV"</span>, <span class="st">"20"</span>, <span class="st">"14"</span>, <span class="st">"dao"</span>, <span class="st">"13"</span>, <span class="st">"6"</span>, <span class="st">"9"</span>, <span class="st">"25"</span>, <span class="st">"12"</span>, <span class="st">"28"</span>, <span class="st">"15"</span>,</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="st">"27"</span>, <span class="st">"pin"</span>, <span class="st">"cf"</span>, <span class="st">"nd"</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="st">"27"</span>, <span class="st">"pin"</span>, <span class="st">"cf"</span>, <span class="st">"nd"</span>, <span class="st">"or"</span>, <span class="st">"DC"</span></span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>family_tab <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">family_corrected =</span> <span class="cn">NA</span>,</span>
@@ -317,15 +317,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">family_correction</td>
-<td style="text-align: right;">1,035</td>
+<td style="text-align: right;">1,038</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">genus_correction</td>
-<td style="text-align: right;">2,499</td>
+<td style="text-align: right;">2,500</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">species_correction</td>
-<td style="text-align: right;">9,847</td>
+<td style="text-align: right;">9,889</td>
 </tr>
 </tbody>
 </table>
@@ -391,7 +391,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="fu">unlink</span>(<span class="st">"data/derived_data/wfo"</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>4,554 species matched a species from the World Flora Online (WFO) except 38 that can be cured manually:</p>
+<p>4,677 species matched a species from the World Flora Online (WFO) except 41 that can be cured manually:</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -421,14 +421,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">TRUE</td>
-<td style="text-align: right;">4,554</td>
+<td style="text-align: right;">4,677</td>
 <td style="text-align: left;"></td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<p>Among matched species, most were exact (not fuzzy misspelled species) and with a single match in WFO, still 224 had multiple matches and 466 were fuzzy misspelled species, both to investigate:</p>
+<p>Among matched species, most were exact (not fuzzy misspelled species) and with a single match in WFO, still 257257 had multiple matches and 444 were fuzzy misspelled species, both to investigate:</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -461,13 +461,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">exact</td>
-<td style="text-align: right;">254</td>
-<td style="text-align: right;">3,798</td>
+<td style="text-align: right;">257</td>
+<td style="text-align: right;">3,868</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">fuzzy</td>
-<td style="text-align: right;">105</td>
-<td style="text-align: right;">397</td>
+<td style="text-align: right;">108</td>
+<td style="text-align: right;">444</td>
 </tr>
 </tbody>
 </table>
@@ -529,9 +529,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Tabernaemontana heptanphyllum"</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>,</span>
 <span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Achatocarpus praecox"</span>, <span class="st">"Achatocarpaceae"</span>, <span class="st">"Achatocarpus"</span>, <span class="st">"praecox"</span></span>
 <span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">cleaning_type =</span> <span class="st">"manual"</span>)</span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>manual_curration <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(manual_curration_1, manual_curration_2)</span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>missing <span class="ot">&lt;-</span> t <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span>(spec.name <span class="sc">%in%</span> manual_curration<span class="sc">$</span>scientific_corrected))</span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(manual_curration, <span class="at">caption =</span> <span class="st">"Manually curated taxonomy that did not match WFO."</span>) <span class="co"># nolint</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>manual_curration_3 <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>scientific_corrected, <span class="sc">~</span>family_cleaned, <span class="sc">~</span>genus_cleaned, <span class="sc">~</span>species_cleaned,</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Anthoshorea group"</span>, <span class="st">"Dipterocarpaceae"</span>, <span class="st">"Anthoshorea"</span>, <span class="cn">NA</span>,</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Hopea nervosaHopea"</span>, <span class="st">"Dipterocarpaceae"</span>, <span class="st">"Hopea"</span>, <span class="st">"nervosa"</span>,</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Keruing putih"</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">cleaning_type =</span> <span class="st">"manual"</span>)</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>manual_curration <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(manual_curration_1, manual_curration_2, manual_curration_3)</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>missing <span class="ot">&lt;-</span> t <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span>(spec.name <span class="sc">%in%</span> manual_curration<span class="sc">$</span>scientific_corrected))</span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(manual_curration, <span class="at">caption =</span> <span class="st">"Manually curated taxonomy that did not match WFO."</span>) <span class="co"># nolint</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -826,6 +833,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: left;">praecox</td>
 <td style="text-align: left;">manual</td>
 </tr>
+<tr class="even">
+<td style="text-align: left;">Anthoshorea group</td>
+<td style="text-align: left;">Dipterocarpaceae</td>
+<td style="text-align: left;">Anthoshorea</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">manual</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hopea nervosaHopea</td>
+<td style="text-align: left;">Dipterocarpaceae</td>
+<td style="text-align: left;">Hopea</td>
+<td style="text-align: left;">nervosa</td>
+<td style="text-align: left;">manual</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Keruing putih</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">manual</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -857,19 +885,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">222</td>
+<td style="text-align: right;">247</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">163</td>
+<td style="text-align: right;">181</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">69</td>
+<td style="text-align: right;">75</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">4</td>
-<td style="text-align: right;">48</td>
+<td style="text-align: right;">49</td>
 </tr>
 </tbody>
 </table>
@@ -892,8 +920,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <table class="table table-sm table-striped small">
 <caption>Fuzzy match with multiple newly accepted names.</caption>
 <colgroup>
-<col style="width: 7%">
-<col style="width: 92%">
+<col style="width: 8%">
+<col style="width: 91%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -935,116 +963,124 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: left;">Celtis jessoensis, Trema micranthum, Celtis tetrandra, Celtis iguanaea</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">Chionanthus pauciflora</td>
+<td style="text-align: left;">Chionanthus ramiflorus, Chionanthus parviflorus</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">Colubrina acreana</td>
 <td style="text-align: left;">Colubrina arborescens, Colubrina beccariana, Emmenosperma papuanum</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Crogbei</td>
 <td style="text-align: left;">Medicosma, Hypericum, Barleria</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Cyathea</td>
 <td style="text-align: left;">Aphelandra, Celastrus, Cynanchum, Synechanthus</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Drypetes Vahl</td>
 <td style="text-align: left;">Drypetes venusta, Drypetes natalensis var. natalensis, Drypetes floribunda</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Enademia</td>
 <td style="text-align: left;">Grevillea, Crateva</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Ficus donnell</td>
 <td style="text-align: left;">Ficus insculpta, Ficus velutina, Ficus thonningii, Ficus glumosa</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Fragrea</td>
 <td style="text-align: left;">Potentilla, Parietaria, Boucerosia</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Gargium</td>
 <td style="text-align: left;">Rhizophora, Forsythia, Galium</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Grewia crassifolia</td>
 <td style="text-align: left;">Microlicia crassifolia, Pseudopanax crassifolius, Microcos grandifolia, Gyrotaenia crassifolia</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Heritiera acuminata</td>
 <td style="text-align: left;">Tabernaemontana catharinensis, Alibertia edulis var. edulis, Gaertnera junghuhniana, Polyscias acuminata</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Indora</td>
 <td style="text-align: left;">Maianthemum, Helicteres</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Inga laterifolia</td>
 <td style="text-align: left;">Campsiandra laurifolia, Zygia latifolia</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Kafer</td>
 <td style="text-align: left;">Symplocos, Coffea</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Knema tomentosa</td>
 <td style="text-align: left;">Desmos cochinchinensis, Maesa macrophylla, Pergularia tomentosa, Palicourea tomentosa, Urena lobata subsp. lobata, Urena lobata subsp. sinuata</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Magnolia candollii</td>
 <td style="text-align: left;">Magnolia liliifera, Magnolia acuminata var. acuminata</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Maltanranthos</td>
 <td style="text-align: left;">Caryopteris, Catanthera</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Measopsis</td>
 <td style="text-align: left;">Marrubium, Fraxinus</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Meranti</td>
 <td style="text-align: left;">Evolvulus, Croton, Cyphokentia, Ceratonia, Myrsine, Pentapetes</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Mesua congestiflora</td>
 <td style="text-align: left;">Macroscepis pleistantha, Ternstroemia congestiflora, Miconia leacongestiflora</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Mesua cornata</td>
 <td style="text-align: left;">Kayea kunstleri, Kayea coriacea</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Paropsia guineensis</td>
 <td style="text-align: left;">Chamaecrista mimosoides, Carapa procera, Garcinia smeathmanii</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Pelawan</td>
 <td style="text-align: left;">Myristica, Pterospermum, Pellionia</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Perospermum</td>
 <td style="text-align: left;">Bonamia, Bhesa</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Pouteria eyma</td>
 <td style="text-align: left;">Pouteria cuspidata subsp. dura, Pleioluma firma, Elaeoluma nuda, Micropholis guyanensis subsp. guyanensis</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Pouteria pouteria</td>
 <td style="text-align: left;">Pleioluma baueri, Planchonella contermina, Pouteria torta subsp. tuberculata, Xantolis hookeri, Pouteria glomerata subsp. glomerata, Chrysophyllum pomiferum, Pouteria durlandii subsp. durlandii, Chrysophyllum sanguinolentum subsp. spurium</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Protium protium</td>
 <td style="text-align: left;">Protium heptaphyllum subsp. heptaphyllum, Protium paniculatum var. riedelianum</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Ragala balata</td>
 <td style="text-align: left;">Rotala rubra, Myristica bialata var. bialata, Erythrophysa alata</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Randia Longflora</td>
 <td style="text-align: left;">Oxyceros longiflorus, Euclinia longiflora, Rothmannia longiflora</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Shorea leporosula</td>
+<td style="text-align: left;">Rubroshorea leprosula, Rubroshorea platycarpa</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Shorea lepranda</td>
@@ -1129,60 +1165,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: left;">Callicarpa kochiana var. kochiana, Callicarpa macrophylla, Callicarpa candicans var. candicans</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">Cinnamomum cassia</td>
+<td style="text-align: left;">Neolitsea cassia, Cinnamomum burmanni</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">Diospyros vestita</td>
 <td style="text-align: left;">Diospyros sericea, Diospyros sumatrana</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Elaeocarpus longipetiolatus</td>
 <td style="text-align: left;">Elaeocarpus stipularis var. longipetiolatus, Elaeocarpus culminicola</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Eugenia racemosa</td>
 <td style="text-align: left;">Eugenia biflora, Barringtonia racemosa</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Ficus anthelminthica</td>
 <td style="text-align: left;">Ficus maxima, Ficus insipida, Ficus obtusiuscula</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Ficus citrifolia</td>
 <td style="text-align: left;">Ficus maxima, Ficus drupacea</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Ficus clusiifolia</td>
 <td style="text-align: left;">Ficus obtusifolia, Ficus elastica</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Ficus frondosa</td>
 <td style="text-align: left;">Ficus polyantha, Ficus albert-smithii</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Gustavia angusta</td>
 <td style="text-align: left;">Gustavia angustifolia, Gustavia augusta</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Inga macrophylla</td>
 <td style="text-align: left;">Inga pilosula, Inga portobellensis</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Inga pavoniana</td>
 <td style="text-align: left;">Inga sapindoides, Inga nobilis subsp. nobilis</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Lasianthus acuminatus</td>
 <td style="text-align: left;">Lasianthus acuminatus, Polyspora excelsa</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Licania guianensis</td>
 <td style="text-align: left;">Moquilea guianensis, Hymenopus heteromorphus var. heteromorphus</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Licania macrophylla</td>
 <td style="text-align: left;">Hymenopus macrophyllus, Licania laxiflora</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Licania pallida</td>
 <td style="text-align: left;">Leptobalanus octandrus subsp. pallidus, Moquilea brittoniana</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Magnolia candollei</td>
+<td style="text-align: left;">Magnolia liliifera, Magnolia acuminata var. acuminata</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Marlierea subulata</td>
@@ -1357,15 +1401,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">family</td>
-<td style="text-align: right;">263</td>
+<td style="text-align: right;">266</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">genus</td>
-<td style="text-align: right;">435</td>
+<td style="text-align: right;">463</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">species</td>
-<td style="text-align: right;">785</td>
+<td style="text-align: right;">819</td>
 </tr>
 </tbody>
 </table>
@@ -1374,7 +1418,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="taxonomic-data" class="level2">
 <h2 class="anchored" data-anchor-id="taxonomic-data"><strong>Taxonomic data</strong></h2>
-<p>All taxonomic data are saved in <code>outputs/axonomy_vX.tsv</code> with the following columns:</p>
+<p>All taxonomic data are saved in <code>outputs/taxonomy_vX.tsv</code> with the following columns:</p>
 <ul>
 <li>site: the site name</li>
 <li>scientific_*: all columns with the scientific name</li>

@@ -8,14 +8,14 @@ library(bayesplot)
 library(sjPlot)
 library(corrplot)
 library(ggfortify)
-version <- 5
+version <- 6
 taxonomy_file <- file.path("outputs", paste0("taxonomy_v", version, ".tsv"))
 traits_file <- file.path("outputs", paste0("traits_v", version, ".tsv"))
 ```
 
 # Functional {.unnumbered}
 
-We used cleaned taxonomy to retrieve data from TRY [@kattge2019] and BIOMASS [@réjou-méchain2017]. This corresponds to **version 5**.
+We used cleaned taxonomy to retrieve data from TRY [@kattge2019] and BIOMASS [@réjou-méchain2017]. This corresponds to **version 6**.
 
 ## Wood density
 
@@ -270,6 +270,8 @@ taxo_traits <- taxo %>%
 ```
 
 ```{r traitcount}
+#| message: false
+#| warning: false
 taxo_traits %>%
   select(site, scientific_cleaned, wd, la, sla, n, wd_try) %>%
   gather(trait, value, -site, -scientific_cleaned) %>%
@@ -291,7 +293,7 @@ taxo_traits %>%
 
 ## All imputed
 
-We used missing data imputation with random forest for with the `missForest` R package to further impute missing trait values [@Gendre2024]. We first aggregated data at the genus level with median trait value to inform genus lacking traits data or species. We obtained for imputation a normalised root mean square error of NRMSE=1.03. We obtained the global PCA below showed globally and per site.
+We used missing data imputation with random forest for with the `missForest` R package to further impute missing trait values [@Gendre2024]. We first aggregated data at the genus level with median trait value to inform genus lacking traits data or species. We obtained for imputation a normalised root mean square error of NRMSE=1.007. We obtained the global PCA below showed globally and per site.
 
 ```{r missForest}
 #| eval: false

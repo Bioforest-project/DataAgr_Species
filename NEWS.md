@@ -1,3 +1,4 @@
+-   species 0.1.0.9025: sp traits update v6 with new harmonized and SUAS
 -   species 0.1.0.9024: sp traits update
 -   species 0.1.0.9023: automatic report v0
 -   species 0.1.0.9022: update misiones v2

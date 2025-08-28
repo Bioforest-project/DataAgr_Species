@@ -3,7 +3,7 @@
 #| include: false
 library(tidyverse)
 library(knitr)
-version <- 5
+version <- 6
 preped_file <- file.path(
   "data", "derived_data",
   paste0("raw_taxo_preped_v", version, ".tsv")
@@ -21,7 +21,7 @@ taxonomy_file <- file.path("outputs", paste0("taxonomy_v", version, ".tsv"))
 
 # Cleaning {.unnumbered}
 
-Then we started by cleaning raw species data content. This corresponds to **version 5**.
+Then we started by cleaning raw species data content. This corresponds to **version 6**.
 
 ## Names corrections
 
@@ -40,7 +40,7 @@ gen_wrong <- c(
   "Nd", "nd10", "nd11", "nd14", "nd15", "nd16", "nd17", "nd2", "nd22",
   "nd23", "nd25", "nd26", "nd27", "nd28", "nd29", "nd33", "nd34",
   "nd4", "nd6", "nd7", "nd9", "N", "F", "cf", "No", "UN", "Un", "Spt",
-  "Unident", "Unknow", "unknown", "Unknown", "ni", "n"
+  "Unident", "Unknow", "unknown", "Unknown", "ni", "n", "OT"
 )
 sp_wrong <- c(
   "Indet", "Indet.", "sp", "sp.", "Schaeff", "Schaeff.", "Mast", "Welw",
@@ -61,7 +61,7 @@ sp_wrong <- c(
   "L", "sur", "P", "4", "sp3", "id", "X", "2", "23", "1", "XVI",
   "19", "17", "5", "7", "22", "21", "3", "10", "11", "18", "16", "8",
   "XIV", "20", "14", "dao", "13", "6", "9", "25", "12", "28", "15",
-  "27", "pin", "cf", "nd"
+  "27", "pin", "cf", "nd", "or", "DC"
 )
 family_tab <- data.frame(
   family_corrected = NA,
@@ -176,7 +176,7 @@ write_tsv(cleaned, wfo_file)
 unlink("data/derived_data/wfo", recursive = TRUE)
 ```
 
-4,554 species matched a species from the World Flora Online (WFO) except 38 that can be cured manually:
+4,677 species matched a species from the World Flora Online (WFO) except 41 that can be cured manually:
 
 ```{r matches}
 #| message: false
@@ -195,7 +195,7 @@ wfo %>%
   )
 ```
 
-Among matched species, most were exact (not fuzzy misspelled species) and with a single match in WFO, still 224 had multiple matches and 466 were fuzzy misspelled species, both to investigate:
+Among matched species, most were exact (not fuzzy misspelled species) and with a single match in WFO, still 257257 had multiple matches and 444 were fuzzy misspelled species, both to investigate:
 
 ```{r fuzzy_unique}
 #| message: false
@@ -270,7 +270,14 @@ manual_curration_2 <- tribble(
   "Tabernaemontana heptanphyllum", NA, NA, NA,
   "Achatocarpus praecox", "Achatocarpaceae", "Achatocarpus", "praecox"
 ) %>% mutate(cleaning_type = "manual")
-manual_curration <- bind_rows(manual_curration_1, manual_curration_2)
+manual_curration_3 <- tribble(
+  ~scientific_corrected, ~family_cleaned, ~genus_cleaned, ~species_cleaned,
+  "Anthoshorea group", "Dipterocarpaceae", "Anthoshorea", NA,
+  "Hopea nervosaHopea", "Dipterocarpaceae", "Hopea", "nervosa",
+  "Keruing putih", NA, NA, NA
+) %>% mutate(cleaning_type = "manual")
+
+manual_curration <- bind_rows(manual_curration_1, manual_curration_2, manual_curration_3)
 missing <- t %>% filter(!(spec.name %in% manual_curration$scientific_corrected))
 kable(manual_curration, caption = "Manually curated taxonomy that did not match WFO.") # nolint
 ```
@@ -406,7 +413,7 @@ data.frame(
 
 ## **Taxonomic data**
 
-All taxonomic data are saved in `outputs/axonomy_vX.tsv` with the following columns:
+All taxonomic data are saved in `outputs/taxonomy_vX.tsv` with the following columns:
 
 -   site: the site name
 -   scientific\_\*: all columns with the scientific name

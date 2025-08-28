@@ -3,7 +3,7 @@
 #| include: false
 library(tidyverse)
 library(knitr)
-version <- 5
+version <- 6
 raw_file <- file.path("data", "raw_data", paste0(
   "raw_taxonomy_v",
   version, ".tsv"
@@ -16,7 +16,7 @@ preped_file <- file.path(
 
 # Raw {.unnumbered}
 
-First we explored raw species data content. This corresponds to **version 5**.
+First we explored raw species data content. This corresponds to **version 6**.
 
 ## Taxonomy preparation
 
@@ -24,7 +24,7 @@ We got different types of misstructured taxonomic informations:
 
 -   Good: BAFOG, Iwokrama, Kabo, Malinau, Manare, Montagne Tortue, Paracou, Tene, Uppangala
 -   Vernacular only - taxonomic information only in vernacular name: Jari, Moju, Peteco, Tapajos Km114, Tapajos Km67
--   Scientific only - taxonomic information only in scientific name: Ecosilva, Jenaro Herrera, Kibale, Lesong, Mbaiki, Misiones, Nelliyampathy, STREK, Sungai Lalang, Ulu Muda, Antimary APU2, Antimary APU3, Corinto, Embrapa Acre, Gola, Iracema, Mil, "Pad Limo 2 Barracos", "Pad Limo Chico Bocao", "Pad Limo Cumaru", "Pad Limo Jatoba", "Pad Limo Pocao", "Pad Limo STCP", "PAD Limoeiro Tabocal", Peixoto, Tirimbina, Ser Filipinas
+-   Scientific only - taxonomic information only in scientific name: Ecosilva, Jenaro Herrera, Kibale, Lesong, Mbaiki, Misiones, Nelliyampathy, STREK, Sungai Lalang, Ulu Muda, Antimary APU2, Antimary APU3, Corinto, Embrapa Acre, Gola, Iracema, Mil, "Pad Limo 2 Barracos", "Pad Limo Chico Bocao", "Pad Limo Cumaru", "Pad Limo Jatoba", "Pad Limo Pocao", "Pad Limo STCP", "PAD Limoeiro Tabocal", Peixoto, Tirimbina, Ser Filipinas, SUAS
 -   Scientific in species - scientifc name in the species column: Sao Nicolau
 
 We smoothed all taxonomic information with five columns: scientific, vernacular, family, genus, species (`derived_data/raw_taxo_preped_vX.tsv`).
@@ -39,7 +39,7 @@ scientific_only <- c(
   "Antimary APU2", "Antimary APU3", "Corinto", "Embrapa Acre", "Gola",
   "Iracema", "Mil", "Pad Limo 2 Barracos", "Pad Limo Chico Bocao",
   "Pad Limo Cumaru", "Pad Limo Jatoba", "Pad Limo Pocao", "Pad Limo STCP",
-  "PAD Limoeiro Tabocal", "Peixoto", "Tirimbina", "Ser Filipinas"
+  "PAD Limoeiro Tabocal", "Peixoto", "Tirimbina", "Ser Filipinas", "SUAS"
 )
 scientific_in_species <- c("Sao Nicolau")
 taxo_easy <- read_tsv(raw_file) %>%
@@ -81,7 +81,7 @@ write_tsv(taxo, preped_file)
 
 ## All
 
-We had data for 41 sites:
+We had data for 43 sites:
 
 ```{r stats}
 taxo %>%
@@ -96,7 +96,7 @@ taxo %>%
   kable(caption = "Numbers per taxonomic levels for each site.")
 ```
 
-In total, we thus add 2,440 species before cleaning:
+In total, we thus add 2,503 species before cleaning:
 
 ```{r totals}
 taxo %>%
@@ -184,7 +184,7 @@ gen_wrong <- c(
   "Nd", "nd10", "nd11", "nd14", "nd15", "nd16", "nd17", "nd2", "nd22",
   "nd23", "nd25", "nd26", "nd27", "nd28", "nd29", "nd33", "nd34",
   "nd4", "nd6", "nd7", "nd9", "N", "F", "cf", "No", "UN", "Un", "Spt",
-  "Unident", "Unknow", "unknown", "Unknown", "ni", "n"
+  "Unident", "Unknow", "unknown", "Unknown", "ni", "n", "OT"
 )
 t <- taxo %>%
   filter(!(genus %in% gen_wrong)) %>%
@@ -233,7 +233,7 @@ sp_wrong <- c(
   "L", "sur", "P", "4", "sp3", "id", "X", "2", "23", "1", "XVI",
   "19", "17", "5", "7", "22", "21", "3", "10", "11", "18", "16", "8",
   "XIV", "20", "14", "dao", "13", "6", "9", "25", "12", "28", "15",
-  "27", "pin", "cf", "nd"
+  "27", "pin", "cf", "nd", "or", "DC"
 )
 t <- taxo %>%
   filter(!(species %in% sp_wrong)) %>%
